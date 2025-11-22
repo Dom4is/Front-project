@@ -12,17 +12,28 @@ export function swap(arr) {
 export const addPrefix = (arr, prefix) =>
   arr.map((element) => `${prefix} ${element}`);
 
+// export const flatten = (arr) => {
+//   // Функция убирает вложенность в массивах
+//   const result = [];
+//   for (const element of arr) {
+//     if (Array.isArray(element)) {
+//       result.push(...flatten(element)); // Рекурсивно добавляем
+//     } else {
+//       result.push(element);
+//     }
+//   }
+//   return result;
+// };
+
 export const flatten = (arr) => {
   // Функция убирает вложенность в массивах
-  const result = [];
-  for (const element of arr) {
-    if (Array.isArray(element)) {
-      result.push(...flatten(element)); // Рекурсивно добавляем
-    } else {
-      result.push(element);
-    }
-  }
-  return result;
+  return arr.reduce(
+    (acc, element) =>
+      Array.isArray(element)
+        ? acc.concat(flatten(element))
+        : acc.concat(element),
+    []
+  );
 };
 
 export const getDomainInfo = (domainLink) => {
