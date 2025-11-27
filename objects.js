@@ -42,11 +42,9 @@ export const getDomainInfo = (domainLink) => {
   if (parts.length === 2) {
     const link = parts[1];
     const protocol = parts[0];
-    console.log(parts);
     const info = { scheme: protocol, name: link };
     return info;
   }
-  console.log(parts);
   const protocol = "http";
   const link = parts[0];
   const info = { scheme: protocol, name: link };
@@ -65,4 +63,15 @@ export const countWords = (text) => {
     }
   }
   return result;
+};
+
+export const getObjectByNames = (obj, keys) => {
+  if (keys.length === 1 && Object.prototype.hasOwnProperty.call(obj, keys[0])) {
+    return obj[keys[0]];
+  } else if (keys.length > 1) {
+    if (Object.prototype.hasOwnProperty.call(obj, keys[0])) {
+      return getObjectByNames(obj[keys[0]], keys.slice(1));
+    }
+  }
+  return null;
 };

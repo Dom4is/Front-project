@@ -1,5 +1,5 @@
-import "./objects.js";
 import get from "lodash/get.js";
+import { flatten, getObjectByNames } from "./objects.js";
 const data = {
   user: "ubuntu",
   hosts: {
@@ -16,16 +16,6 @@ const data = {
 
 const dataName = get(data, "hosts.1.null", "not found");
 
-const getObjectByNames = (obj, keys) => {
-  if (keys.length === 1 && Object.prototype.hasOwnProperty.call(obj, keys[0])) {
-    return obj[keys[0]];
-  } else if (keys.length > 1) {
-    if (Object.prototype.hasOwnProperty.call(obj, keys[0])) {
-      return getObjectByNames(obj[keys[0]], keys.slice(1));
-    }
-  }
-  return null;
-};
-
 console.log(getObjectByNames(data, ["hosts", 1, "null"]));
 console.log(dataName);
+console.log(flatten([1, 2, [2, 2, 2], 5]));
